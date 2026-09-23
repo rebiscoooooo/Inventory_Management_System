@@ -55,15 +55,15 @@ export default function SalesShow({ sale }) {
                             <div className="space-y-3">
                                 <div className="flex justify-between">
                                     <span className="text-gray-600">Total Amount</span>
-                                    <span className="font-bold text-gray-900">${parseFloat(sale.total_amount).toFixed(2)}</span>
+                                    <span className="font-bold text-gray-900">₱{parseFloat(sale.total_amount).toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
                                     <span className="text-gray-600">Cash Tendered</span>
-                                    <span className="font-medium text-gray-900">${parseFloat(sale.cash).toFixed(2)}</span>
+                                    <span className="font-medium text-gray-900">₱{parseFloat(sale.cash).toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between border-t border-gray-200/50 pt-3">
                                     <span className="text-gray-600 font-medium">Change Due</span>
-                                    <span className="font-bold text-indigo-600">${parseFloat(sale.change_amount).toFixed(2)}</span>
+                                    <span className="font-bold text-indigo-600">₱{parseFloat(sale.change_amount).toFixed(2)}</span>
                                 </div>
                             </div>
                         </div>
@@ -99,10 +99,10 @@ export default function SalesShow({ sale }) {
                                                 {item.quantity}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-right text-sm text-gray-500">
-                                                ${parseFloat(item.price).toFixed(2)}
+                                                ₱{parseFloat(item.price).toFixed(2)}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium text-gray-900">
-                                                ${parseFloat(item.subtotal).toFixed(2)}
+                                                ₱{parseFloat(item.subtotal).toFixed(2)}
                                             </td>
                                         </tr>
                                     ))}
@@ -118,7 +118,7 @@ export default function SalesShow({ sale }) {
                                     <tr>
                                         <td colSpan="3" className="px-6 py-4 text-right text-sm font-bold text-gray-700">Total</td>
                                         <td className="px-6 py-4 text-right text-sm font-bold text-indigo-600">
-                                            ${parseFloat(sale.total_amount).toFixed(2)}
+                                            ₱{parseFloat(sale.total_amount).toFixed(2)}
                                         </td>
                                     </tr>
                                 </tfoot>

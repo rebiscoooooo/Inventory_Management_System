@@ -25,6 +25,8 @@
         "@laravel/multiplex": "^0.4.1"
     },
     "dependencies": {
+        "jspdf": "^4.2.1",
+        "jspdf-autotable": "^5.0.8",
         "sweetalert2": "^11.26.25",
         "sweetalert2-react-content": "^5.1.2"
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -23,8 +24,12 @@ class ProductController extends Controller
             'category' => 'nullable|string|max:255',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
-            'image' => 'nullable|string'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096'
         ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('products', 'public');
+        }
 
         Product::create($validated);
         return redirect()->back()->with('success', 'Product created successfully.');
@@ -37,8 +42,19 @@ class ProductController extends Controller
             'category' => 'nullable|string|max:255',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
-            'image' => 'nullable|string'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096'
         ]);
+
+        if ($request->hasFile('image')) {
+            // Delete old image if it exists
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
+            $validated['image'] = $request->file('image')->store('products', 'public');
+        } else {
+            // If no new image was uploaded, remove 'image' from $validated so we don't overwrite the existing one with null
+            unset($validated['image']);
+        }
 
         $product->update($validated);
         return redirect()->back()->with('success', 'Product updated successfully.');
@@ -46,6 +62,9 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
         $product->delete();
         return redirect()->back()->with('success', 'Product deleted successfully.');
     }

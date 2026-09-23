@@ -138,6 +138,22 @@ export default function PosIndex({ products, categories }) {
                                     type="text" 
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            if (filteredProducts.length === 1) {
+                                                addToCart(filteredProducts[0]);
+                                                setSearchQuery('');
+                                            } else if (filteredProducts.length === 0) {
+                                                MySwal.fire({ icon: 'warning', title: 'Not Found', text: 'No products match your search.' });
+                                            } else if (searchQuery) {
+                                                const exactMatch = filteredProducts.find(p => p.name.toLowerCase() === searchQuery.toLowerCase());
+                                                if (exactMatch) {
+                                                    addToCart(exactMatch);
+                                                    setSearchQuery('');
+                                                }
+                                            }
+                                        }
+                                    }}
                                     className="w-full py-3.5 pr-12 border-0 bg-transparent text-slate-800 focus:outline-none focus:ring-0" 
                                     placeholder="Search product name..." 
                                 />

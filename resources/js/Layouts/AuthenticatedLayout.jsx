@@ -38,7 +38,7 @@ export default function Authenticated({ header, children }) {
     }, [flash]);
 
     return (
-        <div className="flex font-['Inter']">
+        <div className="flex bg-transparent min-h-screen">
             {/* Mobile Toggle */}
             <button
                 onClick={() => setShowingNavigationDropdown(!showingNavigationDropdown)}
@@ -49,7 +49,7 @@ export default function Authenticated({ header, children }) {
 
             {/* Sidebar */}
             <aside 
-                className={`fixed md:sticky top-0 left-0 z-40 w-72 min-h-screen bg-white/85 backdrop-blur-md border-r border-slate-200/80 shadow-[0_18px_45px_rgba(15,23,42,0.08)] p-5 flex flex-col transition-transform duration-300 print:hidden ${
+                className={`fixed md:sticky top-0 left-0 z-40 w-72 min-h-screen bg-white/40 backdrop-blur-2xl border-r border-white/50 shadow-[0_18px_45px_rgba(15,23,42,0.05)] p-5 flex flex-col transition-transform duration-300 print:hidden ${
                     showingNavigationDropdown ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
                 }`}
             >

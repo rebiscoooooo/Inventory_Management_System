@@ -97,59 +97,75 @@ export default function StaffIndex({ staff }) {
         >
             <Head title="Staff Management" />
 
-            <div className="glass-panel overflow-hidden sm:rounded-lg">
+            <div className="glass-panel overflow-hidden border border-white/40 shadow-2xl rounded-3xl p-1 mb-8">
                 <div className="overflow-x-auto">
-                    <table className="min-w-full divide-y divide-gray-200/50">
-                        <thead className="bg-slate-50/50 backdrop-blur-md">
-                            <tr>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joined</th>
-                                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    <table className="w-full text-left border-collapse">
+                        <thead>
+                            <tr className="border-b border-white/20">
+                                <th className="px-8 py-5 text-xs font-bold text-slate-500 uppercase tracking-widest bg-white/20 backdrop-blur-md first:rounded-tl-2xl">User</th>
+                                <th className="px-8 py-5 text-xs font-bold text-slate-500 uppercase tracking-widest bg-white/20 backdrop-blur-md">Role</th>
+                                <th className="px-8 py-5 text-xs font-bold text-slate-500 uppercase tracking-widest bg-white/20 backdrop-blur-md">Status</th>
+                                <th className="px-8 py-5 text-xs font-bold text-slate-500 uppercase tracking-widest bg-white/20 backdrop-blur-md">Joined</th>
+                                <th className="px-8 py-5 text-xs font-bold text-slate-500 uppercase tracking-widest bg-white/20 backdrop-blur-md text-right last:rounded-tr-2xl">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-200/50">
+                        <tbody className="divide-y divide-white/20 bg-white/30 backdrop-blur-sm">
                             {staff.data && staff.data.length > 0 ? (
                                 staff.data.map((member) => (
-                                    <tr key={member.id} className="hover:bg-slate-50/50 transition-colors">
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="flex items-center">
-                                                <div className="flex-shrink-0 h-10 w-10">
-                                                    <div className="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold">
-                                                        {member.name.charAt(0).toUpperCase()}
-                                                    </div>
+                                    <tr key={member.id} className="hover:bg-white/60 transition-colors duration-300 group">
+                                        <td className="px-8 py-5 whitespace-nowrap">
+                                            <div className="flex items-center gap-4">
+                                                <div className="flex-shrink-0 h-12 w-12 rounded-2xl bg-gradient-to-br from-indigo-100 to-blue-50 flex items-center justify-center text-indigo-600 font-black text-xl shadow-sm border border-white/50">
+                                                    {member.name.charAt(0).toUpperCase()}
                                                 </div>
-                                                <div className="ml-4">
-                                                    <div className="text-sm font-medium text-gray-900">{member.name} {member.id === authUser.id && <span className="text-xs text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full ml-1">(You)</span>}</div>
-                                                    <div className="text-sm text-gray-500">{member.email}</div>
-                                                    <div className="text-xs text-gray-400 mt-0.5">@{member.username || member.name.toLowerCase().replace(' ', '')}</div>
+                                                <div>
+                                                    <div className="font-bold text-slate-800 flex items-center gap-2">
+                                                        {member.name}
+                                                        {member.id === authUser.id && (
+                                                            <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-blue-500 px-2 py-0.5 rounded-full shadow-sm">You</span>
+                                                        )}
+                                                    </div>
+                                                    <div className="text-sm text-slate-500 font-medium mt-0.5">{member.email}</div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">
-                                            {member.role || 'Staff'}
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${(!member.status || member.status === 'active') ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                                                {member.status || 'Active'}
+                                        <td className="px-8 py-5 whitespace-nowrap">
+                                            <span className={`px-3 py-1 bg-white/50 border border-white/50 rounded-full text-xs font-bold shadow-sm inline-flex items-center gap-1.5 capitalize ${member.role === 'admin' ? 'text-purple-600' : 'text-slate-600'}`}>
+                                                <i className={`bi ${member.role === 'admin' ? 'bi-shield-lock-fill' : 'bi-person-badge'}`}></i>
+                                                {member.role || 'Staff'}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            {new Date(member.created_at).toLocaleDateString()}
+                                        <td className="px-8 py-5 whitespace-nowrap">
+                                            <div className={`px-3 py-1 inline-flex items-center gap-2 rounded-full text-xs font-bold border shadow-sm ${
+                                                (!member.status || member.status === 'active') 
+                                                    ? 'bg-emerald-100/80 border-emerald-200 text-emerald-700' 
+                                                    : 'bg-red-100/80 border-red-200 text-red-700'
+                                            }`}>
+                                                <div className={`w-2 h-2 rounded-full ${(!member.status || member.status === 'active') ? 'bg-emerald-500' : 'bg-red-500'}`}></div>
+                                                {member.status || 'Active'}
+                                            </div>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                            <button onClick={() => openModal(member)} className="text-indigo-600 hover:text-indigo-900 mr-4">Edit</button>
+                                        <td className="px-8 py-5 whitespace-nowrap text-sm text-slate-500 font-medium">
+                                            {new Date(member.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                        </td>
+                                        <td className="px-8 py-5 whitespace-nowrap text-right text-sm">
+                                            <button onClick={() => openModal(member)} className="w-10 h-10 inline-flex items-center justify-center rounded-xl bg-white/50 text-blue-600 hover:bg-blue-600 hover:text-white shadow-sm hover:shadow-md transition-all mr-2">
+                                                <i className="bi bi-pencil-square"></i>
+                                            </button>
                                             {member.id !== authUser.id && (
-                                                <button onClick={() => handleDelete(member.id)} className="text-red-600 hover:text-red-900">Delete</button>
+                                                <button onClick={() => handleDelete(member.id)} className="w-10 h-10 inline-flex items-center justify-center rounded-xl bg-white/50 text-red-500 hover:bg-red-500 hover:text-white shadow-sm hover:shadow-md transition-all">
+                                                    <i className="bi bi-trash"></i>
+                                                </button>
                                             )}
                                         </td>
                                     </tr>
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="5" className="px-6 py-12 text-center text-gray-500">
-                                        No staff members found.
+                                    <td colSpan="5" className="px-8 py-16 text-center text-slate-500">
+                                        <div className="mb-3 text-4xl text-slate-300"><i className="bi bi-people"></i></div>
+                                        <p className="font-medium text-lg">No staff members found</p>
+                                        <p className="text-sm">Click "Add Staff Member" to get started.</p>
                                     </td>
                                 </tr>
                             )}
@@ -158,8 +174,8 @@ export default function StaffIndex({ staff }) {
                 </div>
                 {/* Pagination */}
                 {staff.links && (
-                    <div className="px-6 py-4 border-t border-gray-200">
-                        <div className="text-sm text-gray-500">
+                    <div className="px-8 py-5 bg-white/20 border-t border-white/20 flex justify-between items-center rounded-b-3xl backdrop-blur-md">
+                        <div className="text-sm font-semibold text-slate-600">
                             Showing {staff.from} to {staff.to} of {staff.total} staff members
                         </div>
                     </div>

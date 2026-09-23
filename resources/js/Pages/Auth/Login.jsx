@@ -15,7 +15,11 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <div className="flex flex-col min-h-screen font-['Roboto']">
+        <div className="flex flex-col min-h-screen font-['Roboto'] bg-[url('https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat relative">
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm z-0"></div>
+            
+            <div className="relative z-10 flex flex-col min-h-screen">
             <Head title="Login - GizmoCentral" />
 
             {/* Header */}
@@ -133,6 +137,7 @@ export default function Login({ status, canResetPassword }) {
                             </div>
                         </form>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
