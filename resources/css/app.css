@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --primary-color: #0d6efd;
+        --glass-bg: rgba(255, 255, 255, 0.56);
+        --glass-border: rgba(255, 255, 255, 0.5);
+        --glass-shadow: 0 15px 40px rgba(37, 99, 235, 0.14);
+    }
+    
+    body {
+        background: radial-gradient(circle at top left, rgba(85, 161, 254, 0.45), transparent 45%), radial-gradient(circle at bottom right, rgba(12, 140, 200, 0.26), transparent 40%), linear-gradient(135deg, #eff6ff, #f8fafc);
+        font-family: 'Poppins', 'Roboto', sans-serif;
+        min-height: 100vh;
+        /* Prevent background from scrolling or breaking on small screens */
+        background-attachment: fixed;
+    }
+}
+
+@layer components {
+    .glass-panel {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.24));
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+        border-radius: 1rem;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .glass-panel:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(37, 99, 235, 0.18);
+    }
+    
+    /* Legacy Form Controls override */
+    .form-control, .input-group-text {
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: none;
+    }
+
+    .form-control:focus {
+        background: #ffffff;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    }
+}
+
+@layer utilities {
+    /* Custom Scrollbar Hiding for all browsers */
+    .hide-scroll::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    .hide-scroll {
+        -ms-overflow-style: none !important;
+        scrollbar-width: none !important;
+    }
+
+    /* Hide Number Input Arrows for Cart */
+    .cart-qty-input::-webkit-outer-spin-button,
+    .cart-qty-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .cart-qty-input {
+        -moz-appearance: textfield;
+    }
+}
