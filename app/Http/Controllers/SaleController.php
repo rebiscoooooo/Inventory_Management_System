@@ -8,9 +8,9 @@ use Inertia\Inertia;
 
 class SaleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $sales = Sale::with('items.product')->latest()->paginate(15);
+        $sales = Sale::where('cashier', $request->user()->name)->with('items.product')->latest()->paginate(15);
         return Inertia::render('Sales/Index', [
             'sales' => $sales
         ]);

@@ -11,14 +11,19 @@ use App\Models\User;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $user = $request->user();
+
         $totalUsers = User::count();
         $totalProducts = Product::count();
-        $totalSales = Sale::count();
-        $recentSales = Sale::latest()->take(5)->get();
-        $todaySales = Sale::whereDate('created_at', today())->sum('total_amount');
-        $todayTransactions = Sale::whereDate('created_at', today())->count();
+        
+        $salesQuery = Sale::where('cashier', $user->name);
+
+        $totalSales = (clone $salesQuery)->count();
+        $recentSales = (clone $salesQuery)->latest()->take(5)->get();
+        $todaySales = (clone $salesQuery)->whereDate('created_at', today())->sum('total_amount');
+        $todayTransactions = (clone $salesQuery)->whereDate('created_at', today())->count();
 
         return Inertia::render('Dashboard', [
             'stats' => [

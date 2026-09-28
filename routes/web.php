@@ -25,15 +25,12 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
-    Route::resource('products', ProductController::class);
-    
-    Route::get('/pos', [PosController::class, 'index'])->name('pos.index');
-    Route::post('/pos/checkout', [PosController::class, 'checkout'])->name('pos.checkout');
-    
-    Route::resource('sales', SaleController::class);
-    Route::resource('staff', StaffController::class);
 });
+
+require __DIR__.'/products.php';
+require __DIR__.'/pos.php';
+require __DIR__.'/sales.php';
+require __DIR__.'/staff.php';
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

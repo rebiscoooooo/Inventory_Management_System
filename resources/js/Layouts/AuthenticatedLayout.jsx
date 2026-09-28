@@ -79,7 +79,7 @@ export default function Authenticated({ header, children }) {
 
                 {/* Navigation Links */}
                 <nav className="flex-1 flex flex-col gap-1">
-                    {user.role === 'admin' ? (
+                    {user?.roles?.includes('Admin') ? (
                         <>
                             <p className="uppercase font-bold text-xs mb-2 text-slate-500 tracking-wider">
                                 Admin Controls
