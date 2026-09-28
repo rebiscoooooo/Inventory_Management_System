@@ -20,19 +20,43 @@ class DashboardController extends Controller
         
         $salesQuery = Sale::where('cashier', $user->name);
 
-        $totalSales = (clone $salesQuery)->count();
+        $totalSales = clone $salesQuery;
         $recentSales = (clone $salesQuery)->latest()->take(5)->get();
         $todaySales = (clone $salesQuery)->whereDate('created_at', today())->sum('total_amount');
         $todayTransactions = (clone $salesQuery)->whereDate('created_at', today())->count();
+
+        $adminStats = [];
+        $chartData = [];
+        
+        if ($user->hasRole('Admin')) {
+            $adminStats = [
+                'total_system_sales' => Sale::sum('total_amount'),
+                'total_inventory' => Product::sum('stock'),
+                'total_system_users' => User::count(),
+                'recent_transactions' => Sale::with('items')->latest()->take(5)->get(),
+            ];
+
+            // Last 7 days sales data
+            for ($i = 6; $i >= 0; $i--) {
+                $date = today()->subDays($i);
+                $dailySales = Sale::whereDate('created_at', $date)->sum('total_amount');
+                $chartData[] = [
+                    'name' => $date->format('M d'),
+                    'sales' => (float) $dailySales,
+                ];
+            }
+        }
 
         return Inertia::render('Dashboard', [
             'stats' => [
                 'users' => $totalUsers,
                 'products' => $totalProducts,
-                'sales' => $totalSales,
+                'sales' => $totalSales->count(),
                 'today_sales' => $todaySales,
                 'today_transactions' => $todayTransactions,
             ],
+            'adminStats' => $adminStats,
+            'chartData' => $chartData,
             'recentSales' => $recentSales,
         ]);
     }
