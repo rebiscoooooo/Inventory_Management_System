@@ -1,12 +1,28 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, router, Link } from '@inertiajs/react';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 const MySwal = withReactContent(Swal);
 
-export default function ProductsIndex({ products }) {
+export default function ProductsIndex({ products, filters = {}, categories = [] }) {
+    const [searchTerm, setSearchTerm] = useState(filters.search || '');
+    const [selectedCategory, setSelectedCategory] = useState(filters.category || 'All');
+
+    const applyFilters = (search = searchTerm, category = selectedCategory) => {
+        const query = {};
+        if (search) query.search = search;
+        if (category && category !== 'All') query.category = category;
+        if (filters.filter) query.filter = filters.filter;
+
+        router.get(route('products.index'), query, { preserveState: true, replace: true });
+    };
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        applyFilters();
+    };
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingProduct, setEditingProduct] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
@@ -80,19 +96,61 @@ export default function ProductsIndex({ products }) {
                     <h2 className="text-2xl font-bold leading-tight text-gray-800">
                         Products Management
                     </h2>
-                    <button
-                        onClick={() => openModal()}
-                        className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow-sm transition-colors font-medium flex items-center gap-2"
-                    >
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                        </svg>
-                        Add Product
-                    </button>
+                    <div className="flex items-center gap-3">
+                        {filters.filter === 'low_stock' && (
+                            <Link
+                                href={route('products.index')}
+                                className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 px-4 py-2 rounded-lg shadow-sm transition-colors font-medium flex items-center gap-2"
+                            >
+                                <i className="bi bi-x-circle text-red-500"></i>
+                                Clear Filter
+                            </Link>
+                        )}
+                        <button
+                            onClick={() => openModal()}
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg shadow-sm transition-colors font-medium flex items-center gap-2"
+                        >
+                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                            </svg>
+                            Add Product
+                        </button>
+                    </div>
                 </div>
             }
         >
             <Head title="Products" />
+
+            {/* Filter Bar */}
+            <div className="glass-panel p-4 mb-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
+                <form onSubmit={handleSearchSubmit} className="flex-1 w-full max-w-md relative">
+                    <input
+                        type="text"
+                        placeholder="Search products by name or ID..."
+                        className="w-full bg-white/70 border border-slate-200 rounded-xl pl-11 pr-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <i className="bi bi-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <button type="submit" className="hidden">Search</button>
+                </form>
+
+                <div className="flex gap-4 w-full sm:w-auto">
+                    <select
+                        className="bg-white/70 border border-slate-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm w-full sm:w-48"
+                        value={selectedCategory}
+                        onChange={(e) => {
+                            setSelectedCategory(e.target.value);
+                            applyFilters(searchTerm, e.target.value);
+                        }}
+                    >
+                        <option value="All">All Categories</option>
+                        {categories.map(cat => (
+                            <option key={cat} value={cat}>{cat}</option>
+                        ))}
+                    </select>
+                </div>
+            </div>
 
             <div className="glass-panel overflow-hidden border border-white/40 shadow-2xl rounded-3xl p-1 mb-8">
                 <div className="overflow-x-auto">
@@ -133,13 +191,12 @@ export default function ProductsIndex({ products }) {
                                             ₱{parseFloat(product.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                                         </td>
                                         <td className="px-8 py-5 whitespace-nowrap">
-                                            <div className={`px-3 py-1 inline-flex items-center gap-2 rounded-full text-xs font-bold border shadow-sm ${
-                                                product.stock > 10 
-                                                    ? 'bg-emerald-100/80 border-emerald-200 text-emerald-700' 
-                                                    : product.stock > 0 
-                                                    ? 'bg-amber-100/80 border-amber-200 text-amber-700' 
-                                                    : 'bg-red-100/80 border-red-200 text-red-700'
-                                            }`}>
+                                            <div className={`px-3 py-1 inline-flex items-center gap-2 rounded-full text-xs font-bold border shadow-sm ${product.stock > 10
+                                                    ? 'bg-emerald-100/80 border-emerald-200 text-emerald-700'
+                                                    : product.stock > 0
+                                                        ? 'bg-amber-100/80 border-amber-200 text-amber-700'
+                                                        : 'bg-red-100/80 border-red-200 text-red-700'
+                                                }`}>
                                                 <div className={`w-2 h-2 rounded-full ${product.stock > 10 ? 'bg-emerald-500' : product.stock > 0 ? 'bg-amber-500' : 'bg-red-500'}`}></div>
                                                 {product.stock} in stock
                                             </div>
@@ -189,7 +246,7 @@ export default function ProductsIndex({ products }) {
                                         <i className={`bi ${editingProduct ? 'bi-pencil-square' : 'bi-plus-circle'} mr-3 text-blue-600`}></i>
                                         {editingProduct ? 'Edit Product' : 'Add New Product'}
                                     </h3>
-                                    
+
                                     <div className="mb-5 flex gap-5">
                                         <div className="flex-1">
                                             <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Product Name</label>
@@ -206,9 +263,9 @@ export default function ProductsIndex({ products }) {
                                                         <i className="bi bi-camera text-2xl"></i>
                                                     </div>
                                                 )}
-                                                <input 
-                                                    type="file" 
-                                                    className="hidden" 
+                                                <input
+                                                    type="file"
+                                                    className="hidden"
                                                     accept="image/*"
                                                     onChange={(e) => {
                                                         const file = e.target.files[0];

@@ -14,7 +14,7 @@ class PosController extends Controller
     public function index()
     {
         $products = Product::where('stock', '>', 0)->orderBy('name', 'asc')->get();
-        $categories = Product::select('category')->whereNotNull('category')->distinct()->pluck('category');
+        $categories = Product::select('category')->whereNotNull('category')->where('category', '!=', '')->distinct()->pluck('category');
         
         return Inertia::render('Pos/Index', [
             'products' => $products,

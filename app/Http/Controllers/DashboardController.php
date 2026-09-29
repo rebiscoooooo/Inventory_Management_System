@@ -32,6 +32,7 @@ class DashboardController extends Controller
             $adminStats = [
                 'total_system_sales' => Sale::sum('total_amount'),
                 'total_inventory' => Product::sum('stock'),
+                'low_stock_items' => Product::where('stock', '<=', 10)->count(),
                 'total_system_users' => User::count(),
                 'recent_transactions' => Sale::with('items')->latest()->take(5)->get(),
             ];

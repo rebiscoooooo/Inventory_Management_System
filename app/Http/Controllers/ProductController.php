@@ -9,11 +9,33 @@ use Inertia\Inertia;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::latest()->paginate(10);
+        $query = Product::query();
+
+        if ($request->has('filter') && $request->filter === 'low_stock') {
+            $query->where('stock', '<=', 10);
+        }
+        
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('id', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('category') && $request->category !== 'All') {
+            $query->where('category', $request->category);
+        }
+
+        $products = $query->latest()->paginate(10)->withQueryString();
+        $categories = Product::select('category')->whereNotNull('category')->where('category', '!=', '')->distinct()->pluck('category');
+
         return Inertia::render('Products/Index', [
-            'products' => $products
+            'products' => $products,
+            'filters' => $request->only(['filter', 'search', 'category']),
+            'categories' => $categories
         ]);
     }
 

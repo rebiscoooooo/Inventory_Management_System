@@ -80,7 +80,7 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
                         <i className="bi bi-bar-chart-line-fill text-purple-600"></i> System Analytics
                     </h3>
                     
-                    <div className="grid md:grid-cols-3 gap-6 mb-8">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         <div className="glass-panel p-6 border-t-4 border-t-purple-500">
                             <p className="uppercase text-xs tracking-wider text-slate-500 font-bold mb-1">Total System Revenue</p>
                             <h2 className="text-3xl font-black text-slate-900">₱{parseFloat(adminStats.total_system_sales || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}</h2>
@@ -89,6 +89,11 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
                             <p className="uppercase text-xs tracking-wider text-slate-500 font-bold mb-1">Total Inventory Items</p>
                             <h2 className="text-3xl font-black text-slate-900">{adminStats.total_inventory || 0} Units</h2>
                         </div>
+                        <Link href={route('products.index', { filter: 'low_stock' })} className="glass-panel p-6 border-t-4 border-t-amber-500 hover:-translate-y-1 hover:shadow-xl transition-all cursor-pointer block group">
+                            <p className="uppercase text-xs tracking-wider text-slate-500 font-bold mb-1">Low Stock Items</p>
+                            <h2 className="text-3xl font-black text-amber-600 group-hover:text-amber-700 transition-colors">{adminStats.low_stock_items || 0} Items</h2>
+                            <p className="text-xs text-amber-500 mt-2 font-semibold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"><i className="bi bi-arrow-right-circle"></i> View details</p>
+                        </Link>
                         <div className="glass-panel p-6 border-t-4 border-t-emerald-500">
                             <p className="uppercase text-xs tracking-wider text-slate-500 font-bold mb-1">Total Users</p>
                             <h2 className="text-3xl font-black text-slate-900">{adminStats.total_system_users || 0} Users</h2>
