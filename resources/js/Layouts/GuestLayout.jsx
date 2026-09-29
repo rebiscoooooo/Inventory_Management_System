@@ -11,11 +11,8 @@ export default function GuestLayout({ children }) {
                     <img
                         src="/assets/stamp.png"
                         alt="GizmoCentral Logo"
-                        className="h-24 w-24 object-contain drop-shadow-xl group-hover:scale-110 transition-transform duration-300"
+                        className="h-20 w-auto object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-300 filter brightness-0 invert"
                     />
-                    <h1 className="text-4xl font-bold text-white tracking-wider drop-shadow-lg">
-                        GizmoCentral
-                    </h1>
                 </Link>
             </div>
 

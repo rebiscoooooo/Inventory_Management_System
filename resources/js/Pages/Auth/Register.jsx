@@ -16,12 +16,12 @@ export default function Register() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen overflow-hidden bg-slate-900 selection:bg-emerald-500 selection:text-white relative">
+        <div className="flex flex-col min-h-screen overflow-hidden bg-slate-900 selection:bg-blue-500 selection:text-white relative">
             {/* Premium Animated Background */}
             <div className="absolute inset-0 z-0">
-                <div className="absolute top-0 -left-4 w-96 h-96 bg-emerald-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
-                <div className="absolute top-0 -right-4 w-96 h-96 bg-teal-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
-                <div className="absolute -bottom-8 left-20 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+                <div className="absolute top-0 -left-4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+                <div className="absolute top-0 -right-4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+                <div className="absolute -bottom-8 left-20 w-96 h-96 bg-emerald-500 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/80 to-slate-900"></div>
             </div>
@@ -34,16 +34,11 @@ export default function Register() {
                     <div className="w-full max-w-md animate-fade-in-up">
                         
                         {/* Logo Header */}
-                        <div className="text-center mb-8">
+                        <div className="text-center mb-4">
                             <Link href="/" className="inline-block hover:scale-105 transition-transform duration-300">
-                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-xl shadow-emerald-500/30 p-3 border border-white/20 mx-auto mb-4">
-                                    <img src="/assets/stamp.png" alt="Logo" className="w-full h-full object-contain filter brightness-0 invert" />
-                                </div>
-                                <h2 className="text-3xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-emerald-200">
-                                    Join GizmoCentral
-                                </h2>
+                                <img src="/assets/stamp.png" alt="Logo" className="w-80 sm:w-96 max-w-full object-contain filter brightness-0 invert mx-auto drop-shadow-lg" />
                             </Link>
-                            <p className="mt-2 text-slate-400 font-medium">Create your account and start managing.</p>
+                            <p className="mt-1 text-slate-300 font-medium">Create your account and start managing.</p>
                         </div>
 
                         {/* Glassmorphism Card */}
@@ -55,7 +50,7 @@ export default function Register() {
                                     <div>
                                         <label className="block text-slate-300 text-xs font-bold mb-2 tracking-wider uppercase">Full Name</label>
                                         <div className="relative group">
-                                            <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 group-focus-within:text-emerald-400 transition-colors">
+                                            <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 group-focus-within:text-blue-400 transition-colors">
                                                 <i className="bi bi-person-fill"></i>
                                             </span>
                                             <input 
@@ -63,7 +58,7 @@ export default function Register() {
                                                 name="name"
                                                 value={data.name}
                                                 onChange={(e) => setData('name', e.target.value)}
-                                                className="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 focus:bg-white/10 transition-all text-white placeholder-slate-500 shadow-inner" 
+                                                className="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 focus:bg-white/10 transition-all text-white placeholder-slate-500 shadow-inner" 
                                                 placeholder="Enter your full name" 
                                                 required 
                                                 autoComplete="name"
@@ -76,7 +71,7 @@ export default function Register() {
                                     <div>
                                         <label className="block text-slate-300 text-xs font-bold mb-2 tracking-wider uppercase">Email Address</label>
                                         <div className="relative group">
-                                            <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 group-focus-within:text-emerald-400 transition-colors">
+                                            <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 group-focus-within:text-blue-400 transition-colors">
                                                 <i className="bi bi-envelope-fill"></i>
                                             </span>
                                             <input 
@@ -84,7 +79,7 @@ export default function Register() {
                                                 name="email"
                                                 value={data.email}
                                                 onChange={(e) => setData('email', e.target.value)}
-                                                className="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 focus:bg-white/10 transition-all text-white placeholder-slate-500 shadow-inner" 
+                                                className="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 focus:bg-white/10 transition-all text-white placeholder-slate-500 shadow-inner" 
                                                 placeholder="Enter your email" 
                                                 required 
                                                 autoComplete="username"
@@ -96,7 +91,7 @@ export default function Register() {
                                     <div>
                                         <label className="block text-slate-300 text-xs font-bold mb-2 tracking-wider uppercase">Password</label>
                                         <div className="relative group">
-                                            <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 group-focus-within:text-emerald-400 transition-colors">
+                                            <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 group-focus-within:text-blue-400 transition-colors">
                                                 <i className="bi bi-key-fill"></i>
                                             </span>
                                             <input 
@@ -104,7 +99,7 @@ export default function Register() {
                                                 name="password"
                                                 value={data.password}
                                                 onChange={(e) => setData('password', e.target.value)}
-                                                className="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 focus:bg-white/10 transition-all text-white placeholder-slate-500 shadow-inner" 
+                                                className="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 focus:bg-white/10 transition-all text-white placeholder-slate-500 shadow-inner" 
                                                 placeholder="Create a password" 
                                                 required 
                                                 autoComplete="new-password"
@@ -116,7 +111,7 @@ export default function Register() {
                                     <div>
                                         <label className="block text-slate-300 text-xs font-bold mb-2 tracking-wider uppercase">Confirm Password</label>
                                         <div className="relative group">
-                                            <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 group-focus-within:text-emerald-400 transition-colors">
+                                            <span className="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 group-focus-within:text-blue-400 transition-colors">
                                                 <i className="bi bi-check-circle-fill"></i>
                                             </span>
                                             <input 
@@ -124,7 +119,7 @@ export default function Register() {
                                                 name="password_confirmation"
                                                 value={data.password_confirmation}
                                                 onChange={(e) => setData('password_confirmation', e.target.value)}
-                                                className="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 focus:bg-white/10 transition-all text-white placeholder-slate-500 shadow-inner" 
+                                                className="w-full pl-11 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 focus:bg-white/10 transition-all text-white placeholder-slate-500 shadow-inner" 
                                                 placeholder="Confirm your password" 
                                                 required 
                                                 autoComplete="new-password"
@@ -139,8 +134,8 @@ export default function Register() {
                                             disabled={processing}
                                             className="relative group overflow-hidden rounded-xl w-full"
                                         >
-                                            <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-600 group-hover:scale-105 transition-transform duration-300"></span>
-                                            <span className="relative text-sm font-bold text-white px-6 py-4 flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.4)]">
+                                            <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 group-hover:scale-105 transition-transform duration-300"></span>
+                                            <span className="relative text-sm font-bold text-white px-6 py-4 flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.4)]">
                                                 {processing ? (
                                                     <i className="bi bi-arrow-repeat animate-spin text-xl"></i>
                                                 ) : (
@@ -153,7 +148,7 @@ export default function Register() {
                                     <div className="text-center mt-6 pt-6 border-t border-white/10">
                                         <p className="text-slate-400 text-sm">
                                             Already have an account?{' '}
-                                            <Link href={route('login')} className="text-emerald-400 hover:text-emerald-300 font-bold transition-colors hover:underline">
+                                            <Link href={route('login')} className="text-blue-400 hover:text-blue-300 font-bold transition-colors hover:underline">
                                                 Sign in here
                                             </Link>
                                         </p>

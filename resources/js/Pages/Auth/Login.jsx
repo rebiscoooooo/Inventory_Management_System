@@ -33,13 +33,11 @@ export default function Login({ status, canResetPassword }) {
                     <div className="w-full max-w-md animate-fade-in-up">
                         
                         {/* Logo Header */}
-                        <div className="text-center mb-8">
+                        <div className="text-center mb-4">
                             <Link href="/" className="inline-block hover:scale-105 transition-transform duration-300">
-                                <div className="bg-gradient-to-br flex items-center justify-center p-3 mx-auto mb-4">
-                                    <img src="/assets/stamp.png" alt="Logo" className="w-full h-full object-contain filter brightness-0 invert" />
-                                </div>
+                                <img src="/assets/stamp.png" alt="Logo" className="w-80 sm:w-96 max-w-full object-contain filter brightness-0 invert mx-auto drop-shadow-lg" />
                             </Link>
-                            <p className="mt-2 text-slate-300 font-medium">Welcome back! Please enter your details.</p>
+                            <p className="mt-1 text-slate-300 font-medium">Welcome back! Please enter your details.</p>
                         </div>
 
                         {/* Glassmorphism Card */}
