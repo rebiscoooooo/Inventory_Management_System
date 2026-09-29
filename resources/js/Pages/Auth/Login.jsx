@@ -35,14 +35,11 @@ export default function Login({ status, canResetPassword }) {
                         {/* Logo Header */}
                         <div className="text-center mb-8">
                             <Link href="/" className="inline-block hover:scale-105 transition-transform duration-300">
-                                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-xl shadow-blue-500/30 p-3 border border-white/20 mx-auto mb-4">
+                                <div className="bg-gradient-to-br flex items-center justify-center p-3 mx-auto mb-4">
                                     <img src="/assets/stamp.png" alt="Logo" className="w-full h-full object-contain filter brightness-0 invert" />
                                 </div>
-                                <h2 className="text-3xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-200">
-                                    GizmoCentral
-                                </h2>
                             </Link>
-                            <p className="mt-2 text-slate-400 font-medium">Welcome back! Please enter your details.</p>
+                            <p className="mt-2 text-slate-300 font-medium">Welcome back! Please enter your details.</p>
                         </div>
 
                         {/* Glassmorphism Card */}
@@ -138,7 +135,7 @@ export default function Login({ status, canResetPassword }) {
                                                 {processing ? (
                                                     <i className="bi bi-arrow-repeat animate-spin text-xl"></i>
                                                 ) : (
-                                                    'Sign In'
+                                                    'Log In'
                                                 )}
                                             </span>
                                         </button>
