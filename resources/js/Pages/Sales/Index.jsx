@@ -3,7 +3,7 @@ import { Head, Link } from '@inertiajs/react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-export default function SalesIndex({ sales }) {
+export default function SalesIndex({ sales, stats = {} }) {
     const exportToPDF = () => {
         const doc = new jsPDF();
         
@@ -72,6 +72,48 @@ export default function SalesIndex({ sales }) {
             }
         >
             <Head title="Sales History" />
+
+            {/* Summary Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="glass-panel p-6 border-t-4 border-t-blue-500 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] rounded-3xl relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-blue-500/10 blur-2xl group-hover:bg-blue-500/20 transition-all duration-500"></div>
+                    <div className="relative z-10 flex items-center justify-between">
+                        <div>
+                            <p className="uppercase text-xs tracking-widest text-slate-500 font-bold mb-1">Total Revenue</p>
+                            <h2 className="text-3xl font-black text-slate-900">₱{parseFloat(stats?.total_revenue || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
+                        </div>
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center text-blue-600 shadow-inner">
+                            <i className="bi bi-cash-stack text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="glass-panel p-6 border-t-4 border-t-emerald-500 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] rounded-3xl relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-emerald-500/10 blur-2xl group-hover:bg-emerald-500/20 transition-all duration-500"></div>
+                    <div className="relative z-10 flex items-center justify-between">
+                        <div>
+                            <p className="uppercase text-xs tracking-widest text-slate-500 font-bold mb-1">Today's Sales</p>
+                            <h2 className="text-3xl font-black text-slate-900">₱{parseFloat(stats?.today_revenue || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
+                        </div>
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100 flex items-center justify-center text-emerald-600 shadow-inner">
+                            <i className="bi bi-graph-up-arrow text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="glass-panel p-6 border-t-4 border-t-purple-500 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] rounded-3xl relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 rounded-full bg-purple-500/10 blur-2xl group-hover:bg-purple-500/20 transition-all duration-500"></div>
+                    <div className="relative z-10 flex items-center justify-between">
+                        <div>
+                            <p className="uppercase text-xs tracking-widest text-slate-500 font-bold mb-1">Total Transactions</p>
+                            <h2 className="text-3xl font-black text-slate-900">{stats?.total_transactions || 0}</h2>
+                        </div>
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 flex items-center justify-center text-purple-600 shadow-inner">
+                            <i className="bi bi-receipt-cutoff text-2xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div className="glass-panel overflow-hidden border border-white/40 shadow-2xl rounded-3xl p-1 mb-8">
                 <div className="overflow-x-auto">
