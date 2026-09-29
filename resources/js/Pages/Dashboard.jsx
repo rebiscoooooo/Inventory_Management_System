@@ -39,7 +39,7 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
             </div>
 
             {/* Statistics (Hidden for Admins) */}
-            {!auth?.user?.roles?.includes('Admin') && (
+            {!(auth?.user?.roles?.includes('Admin') || auth?.user?.role === 'admin') && (
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     {/* Sales */}
                     <div className="glass-panel p-6 flex items-center">
@@ -74,7 +74,7 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
             )}
 
             {/* Admin Analytics / Quick Actions Conditional Render */}
-            {auth?.user?.roles?.includes('Admin') ? (
+            {(auth?.user?.roles?.includes('Admin') || auth?.user?.role === 'admin') ? (
                 <>
                     <h3 className="text-2xl font-bold mb-5 text-slate-800 flex items-center gap-2">
                         <i className="bi bi-bar-chart-line-fill text-purple-600"></i> System Analytics
