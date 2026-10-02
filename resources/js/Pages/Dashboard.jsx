@@ -25,7 +25,7 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
             <div className="dashboard-hero rounded-3xl p-8 mb-8 bg-white/85 border border-slate-200/80 shadow-[0_18px_45px_rgba(37,99,235,0.12)]">
                 <div className="flex items-center">
                     <div className="mr-6">
-                        <i className="bi bi-emoji-smile text-6xl text-amber-500"></i>
+
                     </div>
                     <div>
                         <h3 className="text-3xl font-bold text-slate-900">
@@ -79,7 +79,7 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
                     <h3 className="text-2xl font-bold mb-5 text-slate-800 flex items-center gap-2">
                         <i className="bi bi-bar-chart-line-fill text-purple-600"></i> System Analytics
                     </h3>
-                    
+
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         <div className="glass-panel p-6 border-t-4 border-t-purple-500">
                             <p className="uppercase text-xs tracking-wider text-slate-500 font-bold mb-1">Total System Revenue</p>
@@ -110,7 +110,7 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
                                         <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
                                         <XAxis dataKey="name" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
                                         <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `₱${val}`} />
-                                        <Tooltip 
+                                        <Tooltip
                                             contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)' }}
                                             formatter={(value) => [`₱${parseFloat(value).toLocaleString()}`, 'Sales']}
                                         />
@@ -131,7 +131,7 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
                                             <p className="text-xs text-slate-500">By: {tx.cashier}</p>
                                         </div>
                                         <span className="text-xs font-semibold px-2 py-1 bg-green-100 text-green-700 rounded-md">
-                                            {new Date(tx.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                                            {new Date(tx.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                         </span>
                                     </div>
                                 )) : (
