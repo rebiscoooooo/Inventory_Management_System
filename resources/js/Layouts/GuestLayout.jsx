@@ -12,6 +12,7 @@ export default function GuestLayout({ children }) {
                         src="/assets/stamp.png"
                         alt="GizmoCentral Logo"
                         className="h-20 w-auto object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-300 filter brightness-0 invert"
+                        
                     />
                 </Link>
             </div>
