@@ -74,7 +74,23 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
                     {/* Customers */}
                     <div className="glass-panel p-6 flex items-center">
                         <div className="bg-blue-100 rounded-2xl p-5 mr-5">
-                            <i className="bi bi-receipt text-4xl text-blue-600"></i>
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="36" 
+                                height="36" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                strokeWidth="2" 
+                                strokeLinecap="round" 
+                                strokeLinejoin="round" 
+                                className="text-blue-600"
+                            >
+                            <path d="M2 21a8 8 0 0 1 13.292-6" />
+                            <circle cx="10" cy="8" r="5" />
+                            <path d="M19 16v6" />
+                            <path d="M22 19h-6" />
+        </svg>
                         </div>
                         <div>
                             <p className="uppercase text-sm tracking-wider text-slate-500 font-bold mb-1">
