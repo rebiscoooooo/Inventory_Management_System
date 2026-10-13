@@ -119,14 +119,26 @@ export default function PosIndex({ products, categories }) {
                 
                 {/* Product Catalog (Left Side) */}
                 <div className="w-full lg:w-7/12 mb-4 h-[60vh] lg:h-full flex flex-col">
-                    <div className="glass-panel h-full flex flex-col p-0 overflow-hidden shadow-2xl transition-colors">
-                        
-                        {/* Header */}
-                        <div className="px-6 py-5 border-b border-gray-200/50 flex justify-between items-center shrink-0">
-                            <h5 className="mb-0 font-bold text-slate-800 text-xl tracking-wide flex items-center">
-                                <i className="bi bi-box-seam mr-3 text-blue-600 text-2xl"></i>Product Catalog
-                            </h5>
-                        </div>
+    <div className="glass-panel h-full flex flex-col p-0 overflow-hidden shadow-2xl transition-colors">
+        
+        {/* Header */}
+        <div className="px-6 py-5 border-b border-gray-200/50 flex justify-between items-center shrink-0">
+            <h5 className="mb-0 font-bold text-slate-800 text-xl tracking-wide flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Package check" className="w-8 h-8 mr-3 shrink-0">
+                    {/* Box outline */}
+                    <path d="M32 6 L56 19 V38 M8 19 V45 L32 58 L38 54.7" stroke="#116be9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M32 6 L8 19" stroke="#126ae7" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    {/* Box inner edges */}
+                    <path d="M8 19 L32 32 L56 19 M32 32 V58" stroke="#1e6ad5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    {/* Tape detail */}
+                    <path d="M20 12.5 L44 25.5" stroke="#156ae2" strokeWidth="3" strokeLinecap="round"/>
+                    {/* Check badge */}
+                    <circle cx="48" cy="48" r="12" fill="#16a34a"/>
+                    <path d="M42 48.5 L46.5 53 L54.5 43.5" stroke="#ffffff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Product Catalog
+            </h5>
+        </div>
 
                         <div className="p-5 flex flex-col flex-grow overflow-hidden">
                             {/* Search Bar */}
