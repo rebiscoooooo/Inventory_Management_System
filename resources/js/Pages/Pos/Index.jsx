@@ -126,12 +126,12 @@ export default function PosIndex({ products, categories }) {
             <h5 className="mb-0 font-bold text-slate-800 text-xl tracking-wide flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Package check" className="w-8 h-8 mr-3 shrink-0">
                     {/* Box outline */}
-                    <path d="M32 6 L56 19 V38 M8 19 V45 L32 58 L38 54.7" stroke="#116be9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M32 6 L8 19" stroke="#126ae7" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M32 6 L56 19 V38 M8 19 V45 L32 58 L38 54.7" stroke="#1969d9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M32 6 L8 19" stroke="#1a63ca" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                     {/* Box inner edges */}
-                    <path d="M8 19 L32 32 L56 19 M32 32 V58" stroke="#1e6ad5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M8 19 L32 32 L56 19 M32 32 V58" stroke="#1064d9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                     {/* Tape detail */}
-                    <path d="M20 12.5 L44 25.5" stroke="#156ae2" strokeWidth="3" strokeLinecap="round"/>
+                    <path d="M20 12.5 L44 25.5" stroke="#2168cb" strokeWidth="3" strokeLinecap="round"/>
                     {/* Check badge */}
                     <circle cx="48" cy="48" r="12" fill="#16a34a"/>
                     <path d="M42 48.5 L46.5 53 L54.5 43.5" stroke="#ffffff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>

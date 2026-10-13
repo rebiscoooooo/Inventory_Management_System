@@ -44,17 +44,32 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
                     {/* Sales */}
                     <div className="glass-panel p-6 flex items-center">
                         <div className="bg-green-100 rounded-2xl p-5 mr-5">
-                            <i className="bi bi-wallet2 text-4xl text-green-600"></i>
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="36" 
+                                height="36" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                strokeWidth="2" 
+                                strokeLinecap="round" 
+                                strokeLinejoin="round" 
+                                className="text-green-600"
+                            >
+                                <line x1="12" x2="12" y1="20" y2="10" />
+                                <line x1="18" x2="18" y1="20" y2="4" />
+                                <line x1="6" x2="6" y1="20" y2="16" />
+                            </svg>
                         </div>
-                        <div>
-                            <p className="uppercase text-sm tracking-wider text-slate-500 font-bold mb-1">
-                                My Sales Today
-                            </p>
-                            <h2 className="text-4xl font-bold text-slate-900">
-                                ₱{stats ? parseFloat(stats.today_sales || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
-                            </h2>
-                        </div>
-                    </div>
+                    <div>
+        <p className="uppercase text-sm tracking-wider text-slate-500 font-bold mb-1">
+            My Sales Today
+        </p>
+        <h2 className="text-4xl font-bold text-slate-900">
+             {stats ? parseFloat(stats.today_sales || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+        </h2>
+    </div>
+</div>
 
                     {/* Customers */}
                     <div className="glass-panel p-6 flex items-center">
