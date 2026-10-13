@@ -11,7 +11,7 @@ export default function PosIndex({ products, categories }) {
     const [cart, setCart] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('all');
-    const [cashTendered, setCashTendered] = useState('');
+    const [cashEntered, setCashEntered] = useState('');
     const [showReceipt, setShowReceipt] = useState(false);
     const [receiptData, setReceiptData] = useState(null);
 
@@ -23,7 +23,7 @@ export default function PosIndex({ products, categories }) {
     }, [flash]);
 
     const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const changeAmount = cashTendered ? (parseFloat(cashTendered) - totalAmount) : 0;
+    const changeAmount = cashEntered ? (parseFloat(cashEntered) - totalAmount) : 0;
 
     const filteredProducts = products.filter(product => {
         const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
@@ -82,8 +82,8 @@ export default function PosIndex({ products, categories }) {
             return;
         }
         
-        if (!cashTendered || parseFloat(cashTendered) < totalAmount) {
-            MySwal.fire({ icon: 'error', title: 'Insufficient Cash', text: 'The cash tendered is less than the total amount.' });
+        if (!cashEntered || parseFloat(cashEntered) < totalAmount) {
+            MySwal.fire({ icon: 'error', title: 'Insufficient Cash', text: 'The cash Entered is less than the total amount.' });
             return;
         }
 
@@ -96,13 +96,13 @@ export default function PosIndex({ products, categories }) {
 
         router.post(route('pos.checkout'), {
             total_amount: totalAmount,
-            cash: cashTendered,
+            cash: cashEntered,
             change_amount: changeAmount,
             items: formattedItems
         }, {
             onSuccess: () => {
                 setCart([]);
-                setCashTendered('');
+                setCashEntered('');
             }
         });
     };
@@ -301,15 +301,15 @@ export default function PosIndex({ products, categories }) {
                                 <h2 className="font-black text-blue-600 text-2xl mb-0 tracking-tight">₱ {totalAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                             </div>
 
-                            {/* Cash Tendered */}
+                            {/* Cash Entered */}
                             <div className="mb-4">
-                                <label className="block font-bold text-[10px] mb-2 tracking-wide uppercase text-slate-500">Cash Tendered</label>
+                                <label className="block font-bold text-[10px] mb-2 tracking-wide uppercase text-slate-500">Cash Entered</label>
                                 <div className="relative form-control p-0 overflow-hidden flex focus-within:border-green-500 focus-within:ring-1 focus-within:ring-green-500 transition-all shadow-sm items-center bg-white/80 rounded-xl border border-slate-200">
                                     <span className="px-4 py-3 text-green-500 font-bold text-lg border-r border-slate-200">₱ </span>
                                     <input 
                                         type="number" 
-                                        value={cashTendered}
-                                        onChange={(e) => setCashTendered(e.target.value)}
+                                        value={cashEntered}
+                                        onChange={(e) => setCashEntered(e.target.value)}
                                         className="w-full py-3 pr-4 bg-transparent border-0 font-bold text-xl text-right text-green-600 focus:outline-none focus:ring-0" 
                                         placeholder="0.00"
                                     />
@@ -327,7 +327,7 @@ export default function PosIndex({ products, categories }) {
                             {/* Pay Button */}
                             <button 
                                 onClick={handleCheckout}
-                                disabled={cart.length === 0 || !cashTendered || parseFloat(cashTendered) < totalAmount}
+                                disabled={cart.length === 0 || !cashEntered || parseFloat(cashEntered) < totalAmount}
                                 className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 font-bold rounded-2xl text-base flex justify-center items-center transition-all shadow-md uppercase tracking-wide border-0 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <i className="bi bi-printer mr-2"></i> PAY & PRINT
