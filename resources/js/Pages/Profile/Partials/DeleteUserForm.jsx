@@ -10,7 +10,6 @@ import { useRef, useState } from 'react';
 export default function DeleteUserForm({ className = '' }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef();
-
     const {
         data,
         setData,
@@ -29,7 +28,6 @@ export default function DeleteUserForm({ className = '' }) {
 
     const deleteUser = (e) => {
         e.preventDefault();
-
         destroy(route('profile.destroy'), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
@@ -40,7 +38,6 @@ export default function DeleteUserForm({ className = '' }) {
 
     const closeModal = () => {
         setConfirmingUserDeletion(false);
-
         clearErrors();
         reset();
     };
@@ -48,42 +45,50 @@ export default function DeleteUserForm({ className = '' }) {
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">
+                <h2 className="flex items-center gap-3 text-lg font-medium text-gray-900">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" role="img" aria-label="User round x">
+                        {/* Head */}
+                        <circle cx="26" cy="20" r="10"
+                                stroke="#334155" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+
+                        {/* Shoulders (open on the right to make room for the badge) */}
+                        <path d="M6 56 C6 45 14 38 26 38 C29 38 32 38.6 35 39.8"
+                              stroke="#334155" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+
+                        {/* X badge */}
+                        <circle cx="48" cy="48" r="12" fill="#dc2626"/>
+                        <path d="M43 43 L53 53 M53 43 L43 53"
+                              stroke="#ffffff" strokeWidth="3.5" strokeLinecap="round"/>
+                    </svg>
                     Delete Account
                 </h2>
-
                 <p className="mt-1 text-sm text-gray-600">
-                    Once your account is deleted, all of its resources and data
+                    Once your account is deleted, all of its resources and data Melmelmel
                     will be permanently deleted. Before deleting your account,
                     please download any data or information that you wish to
                     retain.
                 </p>
             </header>
-
             <DangerButton onClick={confirmUserDeletion}>
                 Delete Account
             </DangerButton>
-
             <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-6">
                     <h2 className="text-lg font-medium text-gray-900">
                         Are you sure you want to delete your account?
                     </h2>
-
                     <p className="mt-1 text-sm text-gray-600">
                         Once your account is deleted, all of its resources and
                         data will be permanently deleted. Please enter your
                         password to confirm you would like to permanently delete
                         your account.
                     </p>
-
                     <div className="mt-6">
                         <InputLabel
                             htmlFor="password"
                             value="Password"
                             className="sr-only"
                         />
-
                         <TextInput
                             id="password"
                             type="password"
@@ -97,18 +102,15 @@ export default function DeleteUserForm({ className = '' }) {
                             isFocused
                             placeholder="Password"
                         />
-
                         <InputError
                             message={errors.password}
                             className="mt-2"
                         />
                     </div>
-
                     <div className="mt-6 flex justify-end">
                         <SecondaryButton onClick={closeModal}>
                             Cancel
                         </SecondaryButton>
-
                         <DangerButton className="ms-3" disabled={processing}>
                             Delete Account
                         </DangerButton>
