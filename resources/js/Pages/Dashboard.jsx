@@ -25,7 +25,7 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
             <div className="dashboard-hero rounded-3xl p-8 mb-8 bg-white/85 border border-slate-200/80 shadow-[0_18px_45px_rgba(37,99,235,0.12)]">
                 <div className="flex items-center">
                     <div className="mr-6">
-                        <i className="bi bi-emoji-smile text-6xl text-amber-500"></i>
+
                     </div>
                     <div>
                         <h3 className="text-3xl font-bold text-slate-900">
@@ -44,22 +44,53 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
                     {/* Sales */}
                     <div className="glass-panel p-6 flex items-center">
                         <div className="bg-green-100 rounded-2xl p-5 mr-5">
-                            <i className="bi bi-wallet2 text-4xl text-green-600"></i>
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="36" 
+                                height="36" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                strokeWidth="2" 
+                                strokeLinecap="round" 
+                                strokeLinejoin="round" 
+                                className="text-green-600"
+                            >
+                                <line x1="12" x2="12" y1="20" y2="10" />
+                                <line x1="18" x2="18" y1="20" y2="4" />
+                                <line x1="6" x2="6" y1="20" y2="16" />
+                            </svg>
                         </div>
-                        <div>
-                            <p className="uppercase text-sm tracking-wider text-slate-500 font-bold mb-1">
-                                My Sales Today
-                            </p>
-                            <h2 className="text-4xl font-bold text-slate-900">
-                                ₱{stats ? parseFloat(stats.today_sales || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
-                            </h2>
-                        </div>
-                    </div>
+                    <div>
+        <p className="uppercase text-sm tracking-wider text-slate-500 font-bold mb-1">
+            My Sales Today
+        </p>
+        <h2 className="text-4xl font-bold text-slate-900">
+             {stats ? parseFloat(stats.today_sales || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+        </h2>
+    </div>
+</div>
 
                     {/* Customers */}
                     <div className="glass-panel p-6 flex items-center">
                         <div className="bg-blue-100 rounded-2xl p-5 mr-5">
-                            <i className="bi bi-receipt text-4xl text-blue-600"></i>
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="36" 
+                                height="36" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                strokeWidth="2" 
+                                strokeLinecap="round" 
+                                strokeLinejoin="round" 
+                                className="text-blue-600"
+                            >
+                            <path d="M2 21a8 8 0 0 1 13.292-6" />
+                            <circle cx="10" cy="8" r="5" />
+                            <path d="M19 16v6" />
+                            <path d="M22 19h-6" />
+        </svg>
                         </div>
                         <div>
                             <p className="uppercase text-sm tracking-wider text-slate-500 font-bold mb-1">
@@ -79,7 +110,7 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
                     <h3 className="text-2xl font-bold mb-5 text-slate-800 flex items-center gap-2">
                         <i className="bi bi-bar-chart-line-fill text-purple-600"></i> System Analytics
                     </h3>
-                    
+
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         <div className="glass-panel p-6 border-t-4 border-t-purple-500">
                             <p className="uppercase text-xs tracking-wider text-slate-500 font-bold mb-1">Total System Revenue</p>
@@ -110,7 +141,7 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
                                         <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
                                         <XAxis dataKey="name" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
                                         <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `₱${val}`} />
-                                        <Tooltip 
+                                        <Tooltip
                                             contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.1)' }}
                                             formatter={(value) => [`₱${parseFloat(value).toLocaleString()}`, 'Sales']}
                                         />
@@ -131,7 +162,7 @@ export default function Dashboard({ auth, stats, adminStats, chartData }) {
                                             <p className="text-xs text-slate-500">By: {tx.cashier}</p>
                                         </div>
                                         <span className="text-xs font-semibold px-2 py-1 bg-green-100 text-green-700 rounded-md">
-                                            {new Date(tx.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                                            {new Date(tx.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                         </span>
                                     </div>
                                 )) : (
