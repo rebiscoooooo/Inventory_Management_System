@@ -11,7 +11,7 @@ export default function PosIndex({ products, categories }) {
     const [cart, setCart] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('all');
-    const [cashEntered, setCashEntered] = useState('');
+    const [cashTendered, setCashTendered] = useState('');
     const [showReceipt, setShowReceipt] = useState(false);
     const [receiptData, setReceiptData] = useState(null);
 
@@ -23,7 +23,7 @@ export default function PosIndex({ products, categories }) {
     }, [flash]);
 
     const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const changeAmount = cashEntered ? (parseFloat(cashEntered) - totalAmount) : 0;
+    const changeAmount = cashTendered ? (parseFloat(cashTendered) - totalAmount) : 0;
 
     const filteredProducts = products.filter(product => {
         const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
@@ -82,8 +82,8 @@ export default function PosIndex({ products, categories }) {
             return;
         }
         
-        if (!cashEntered || parseFloat(cashEntered) < totalAmount) {
-            MySwal.fire({ icon: 'error', title: 'Insufficient Cash', text: 'The cash Entered is less than the total amount.' });
+        if (!cashTendered || parseFloat(cashTendered) < totalAmount) {
+            MySwal.fire({ icon: 'error', title: 'Insufficient Cash', text: 'The cash tendered is less than the total amount.' });
             return;
         }
 
@@ -96,13 +96,13 @@ export default function PosIndex({ products, categories }) {
 
         router.post(route('pos.checkout'), {
             total_amount: totalAmount,
-            cash: cashEntered,
+            cash: cashTendered,
             change_amount: changeAmount,
             items: formattedItems
         }, {
             onSuccess: () => {
                 setCart([]);
-                setCashEntered('');
+                setCashTendered('');
             }
         });
     };
@@ -119,26 +119,14 @@ export default function PosIndex({ products, categories }) {
                 
                 {/* Product Catalog (Left Side) */}
                 <div className="w-full lg:w-7/12 mb-4 h-[60vh] lg:h-full flex flex-col">
-    <div className="glass-panel h-full flex flex-col p-0 overflow-hidden shadow-2xl transition-colors">
-        
-        {/* Header */}
-        <div className="px-6 py-5 border-b border-gray-200/50 flex justify-between items-center shrink-0">
-            <h5 className="mb-0 font-bold text-slate-800 text-xl tracking-wide flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Package check" className="w-8 h-8 mr-3 shrink-0">
-                    {/* Box outline */}
-                    <path d="M32 6 L56 19 V38 M8 19 V45 L32 58 L38 54.7" stroke="#1969d9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M32 6 L8 19" stroke="#1a63ca" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-                    {/* Box inner edges */}
-                    <path d="M8 19 L32 32 L56 19 M32 32 V58" stroke="#1064d9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-                    {/* Tape detail */}
-                    <path d="M20 12.5 L44 25.5" stroke="#2168cb" strokeWidth="3" strokeLinecap="round"/>
-                    {/* Check badge */}
-                    <circle cx="48" cy="48" r="12" fill="#16a34a"/>
-                    <path d="M42 48.5 L46.5 53 L54.5 43.5" stroke="#ffffff" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                Product Catalog
-            </h5>
-        </div>
+                    <div className="glass-panel h-full flex flex-col p-0 overflow-hidden shadow-2xl transition-colors">
+                        
+                        {/* Header */}
+                        <div className="px-6 py-5 border-b border-gray-200/50 flex justify-between items-center shrink-0">
+                            <h5 className="mb-0 font-bold text-slate-800 text-xl tracking-wide flex items-center">
+                                <i className="bi bi-box-seam mr-3 text-blue-600 text-2xl"></i>Product Catalog
+                            </h5>
+                        </div>
 
                         <div className="p-5 flex flex-col flex-grow overflow-hidden">
                             {/* Search Bar */}
@@ -313,15 +301,15 @@ export default function PosIndex({ products, categories }) {
                                 <h2 className="font-black text-blue-600 text-2xl mb-0 tracking-tight">₱ {totalAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h2>
                             </div>
 
-                            {/* Cash Entered */}
+                            {/* Cash Tendered */}
                             <div className="mb-4">
-                                <label className="block font-bold text-[10px] mb-2 tracking-wide uppercase text-slate-500">Cash Entered</label>
+                                <label className="block font-bold text-[10px] mb-2 tracking-wide uppercase text-slate-500">Cash Tendered</label>
                                 <div className="relative form-control p-0 overflow-hidden flex focus-within:border-green-500 focus-within:ring-1 focus-within:ring-green-500 transition-all shadow-sm items-center bg-white/80 rounded-xl border border-slate-200">
                                     <span className="px-4 py-3 text-green-500 font-bold text-lg border-r border-slate-200">₱ </span>
                                     <input 
                                         type="number" 
-                                        value={cashEntered}
-                                        onChange={(e) => setCashEntered(e.target.value)}
+                                        value={cashTendered}
+                                        onChange={(e) => setCashTendered(e.target.value)}
                                         className="w-full py-3 pr-4 bg-transparent border-0 font-bold text-xl text-right text-green-600 focus:outline-none focus:ring-0" 
                                         placeholder="0.00"
                                     />
@@ -339,7 +327,7 @@ export default function PosIndex({ products, categories }) {
                             {/* Pay Button */}
                             <button 
                                 onClick={handleCheckout}
-                                disabled={cart.length === 0 || !cashEntered || parseFloat(cashEntered) < totalAmount}
+                                disabled={cart.length === 0 || !cashTendered || parseFloat(cashTendered) < totalAmount}
                                 className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 font-bold rounded-2xl text-base flex justify-center items-center transition-all shadow-md uppercase tracking-wide border-0 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <i className="bi bi-printer mr-2"></i> PAY & PRINT

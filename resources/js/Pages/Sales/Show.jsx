@@ -58,7 +58,7 @@ export default function SalesShow({ sale }) {
                                     <span className="font-bold text-gray-900">₱{parseFloat(sale.total_amount).toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-600">Cash Entered</span>
+                                    <span className="text-gray-600">Cash Tendered</span>
                                     <span className="font-medium text-gray-900">₱{parseFloat(sale.cash).toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between border-t border-gray-200/50 pt-3">
