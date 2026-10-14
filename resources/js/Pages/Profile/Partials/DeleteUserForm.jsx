@@ -45,7 +45,7 @@ export default function DeleteUserForm({ className = '' }) {
     return (
         <section className={`space-y-6 ${className}`}>
             <header>
-                <h2 className="flex items-center gap-3 text-lg font-medium text-gray-900">
+                <h2 className="flex items-center gap-3 text-lg font-bold text-red-900">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" role="img" aria-label="User round x">
                         {/* Head */}
                         <circle cx="26" cy="20" r="10"

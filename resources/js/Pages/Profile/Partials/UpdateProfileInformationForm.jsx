@@ -24,7 +24,7 @@ export default function UpdateProfileInformation({
         <section className={className}>
             <header>
                 {/* Added 'flex items-center gap-3' to perfectly align the SVG and text inline */}
-                <h2 className="flex items-center gap-3 text-lg font-medium text-gray-900">
+                <h2 className="flex items-center gap-3 text-lg font-bold text-blue-900">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" role="img" aria-label="ID card">
                         <rect x="6" y="12" width="52" height="40" rx="5" stroke="#334155" strokeWidth="3" strokeLinejoin="round"/>
                         <rect x="27" y="16" width="10" height="3" rx="1.5" fill="#334155"/>
@@ -87,18 +87,11 @@ export default function UpdateProfileInformation({
                     </div>
                 )}
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
-                    <Transition
-                        show={recentlySuccessful}
-                        enter="transition ease-in-out"
-                        enterFrom="opacity-0"
-                        leave="transition ease-in-out"
-                        leaveTo="opacity-0"
-                    >
-                        <p className="text-sm text-gray-600">
-                            Saved.
-                        </p>
-                    </Transition>
+                    <PrimaryButton 
+                        className="bg-green-600 hover:bg-green-500 focus:bg-green-700 active:bg-green-800 focus:ring-green-500" 
+                        disabled={processing}
+                    >Save
+                    </PrimaryButton>
                 </div>
             </form>
         </section>

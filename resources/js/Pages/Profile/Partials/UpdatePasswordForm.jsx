@@ -44,7 +44,7 @@ export default function UpdatePasswordForm({ className = '' }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="flex items-center gap-3 text-lg font-medium text-gray-900">
+                <h2 className="flex items-center gap-3 text-lg font-bold text-green-900">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" role="img" aria-label="Shield check">
                         {/* Shield */}
                         <path d="M32 6 L53 13.5 V30 C53 43 44 52.5 32 58 C20 52.5 11 43 11 30 V13.5 Z"
@@ -117,18 +117,11 @@ export default function UpdatePasswordForm({ className = '' }) {
                     />
                 </div>
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
-                    <Transition
-                        show={recentlySuccessful}
-                        enter="transition ease-in-out"
-                        enterFrom="opacity-0"
-                        leave="transition ease-in-out"
-                        leaveTo="opacity-0"
-                    >
-                        <p className="text-sm text-gray-600">
-                            Saved.
-                        </p>
-                    </Transition>
+                    <PrimaryButton 
+                        className="bg-green-600 hover:bg-green-500 focus:bg-green-700 active:bg-green-800 focus:ring-green-500" 
+                            disabled={processing}
+                    >Save
+                    </PrimaryButton>
                 </div>
             </form>
         </section>
